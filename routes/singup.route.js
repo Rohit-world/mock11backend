@@ -8,9 +8,9 @@ SignupRoute.post("/", ISUSEREXIST, async (req, res) => {
   const { Email, Password } = req.body;
   console.log(req.body);
   const hashedPass = await bcrypt.hash(Password, 6);
-  const newUser = new UserModel({ Email, Password: hashedPass, IPAddress });
+  const newUser = new UserModel({ Email, Password: hashedPass});
   await newUser.save();
-  res.status(201).send({ msg: "User created successfull" });
+  res.status(201).send({ msg: "SignUp successfull" });
 });
 
 
