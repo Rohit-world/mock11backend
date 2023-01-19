@@ -10,7 +10,7 @@ SignupRoute.post("/", ISUSEREXIST, async (req, res) => {
   const hashedPass = await bcrypt.hash(Password, 6);
   const newUser = new UserModel({ Email, Password: hashedPass});
   await newUser.save();
-  res.status(201).send({ msg: "SignUp successfull" });
+  res.send({ msg: "SignUp successfull" });
 });
 
 

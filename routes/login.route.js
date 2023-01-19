@@ -5,13 +5,13 @@ const LoginRoute = express.Router();
 const { UserModel } = require("../models/user.model");
 LoginRoute.post("/", async (req, res) => {
     const { Email, Password } = req.body;
-    if (!Email || !Password) res.status(400).send({ msg: "wrong creadentials" });
+    if (!Email || !Password) res.send({ msg: "wrong creadentials" });
     const user = await UserModel.findOne({ Email: Email });
-    if (!user) return res.status(400).send({ msg: "wrong creadentials" });
+    if (!user) return res.send({ msg: "wrong creadentials" });
     const isValidUser = await bcrypt.compare(Password, user.Password);
-    if (!isValidUser) return res.status(400).send({ msg: "wrong creadentials" });
+    if (!isValidUser) return res.send({ msg: "wrong creadentials" });
     var token = await jwt.sign({ userID: user._id }, "bugreport");
-    res.status(202).send(token);
+    res.send(token);
   });
   
 
